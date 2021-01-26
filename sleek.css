@@ -1,6 +1,16 @@
 
-#image-container {
-  height: 250px 
-  
 
+.left-item {
+  height: 250px;
+  width: 250px;
+}
+
+.right-item {
+  height: 250px;
+  width: 250px;
+}
+
+.middle-item {
+  height: 250px;
+  width: 250px;
 }
