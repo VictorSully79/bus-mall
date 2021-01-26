@@ -1,16 +1,10 @@
 
-
-.left-item {
-  height: 250px;
-  width: 250px;
+#image-container {
+  display: inline;
 }
 
-.right-item {
-  height: 250px;
-  width: 250px;
-}
-
-.middle-item {
+#left-item {
+  display: inline-block;
   height: 250px;
   width: 250px;
 }

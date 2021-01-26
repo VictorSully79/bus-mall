@@ -36,37 +36,46 @@ var imageContainer = document.getElementById('image-container');
 var leftItem = document.getElementById('left-item');
 var middleItem = document.getElementById('middle-item');
 var rightItem = document.getElementById('right-item');
-var usedImagesArray = [];
+
 
 function generateRandomItems() {
   var leftIndex = Math.floor(Math.random() * SalesImage.allImages.length);
   var middleIndex = Math.floor(Math.random() * SalesImage.allImages.length);
   var rightIndex = Math.floor(Math.random() * SalesImage.allImages.length);
 
-  usedImagesArray.push(leftIndex, middleIndex, rightIndex);
+
 
 
   while (leftIndex === rightIndex || leftIndex === middleIndex || middleIndex === rightIndex) {
-    Math.floor(Math.random() * SalesImage.allImages.length); }
-    // while (leftIndex === middleIndex) {
-    // Math.floor(Math.random() * SalesImage.allImages.length);
-    // while (middleIndex === rightIndex) {
-    // Math.floor(Math.random() * SalesImage.allImages.length);
-    // while (middleIndex === leftIndex) {
-    // Math.floor(Math.random() * SalesImage.allImages.length);
-    // while (rightIndex === middleIndex) {
-    // Math.floor(Math.random() * SalesImage.allImages.length);
-    // while (rightIndex === leftIndex) {
-    // Math.floor(Math.random() * SalesImage.allImages.length);
+    if (leftIndex === rightIndex); {
+      rightIndex = Math.floor(Math.random() * SalesImage.allimages.length);
+    }
+    if (leftIndex === middleIndex); {
+      middleIndex = Math.floor(Math.random() * SalesImage.allimages.length);
+    }
+
+    if (middleIndex === rightIndex); {
+      rightIndex = Math.floor(Math.random() * SalesImage.allimages.length);
+    }
+  }
+
 
   var leftChoice = SalesImage.allImages[leftIndex];
   var middleChoice = SalesImage.allImages[middleIndex];
   var rightChoice = SalesImage.allImages[rightIndex];
 
   return [leftChoice, middleChoice, rightChoice];
-
-
 }
+
+
+
+
+
+
+
+
+
+
 function renderImages(leftChoice, middleChoice, rightChoice) {
   leftItem.src = leftChoice.image;
   leftItem.timesShown++;
@@ -77,6 +86,9 @@ function renderImages(leftChoice, middleChoice, rightChoice) {
   rightItem.src = rightChoice.image;
   rightItem.timesShown++;
 }
+
+
 var randomImages = generateRandomItems();
 renderImages(randomImages[0], randomImages[1], randomImages[2]);
+
 
