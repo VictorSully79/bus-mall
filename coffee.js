@@ -1,13 +1,35 @@
-function SalesImage(image) {
+
+var products = ['images/bag.jpg', 'images/banana.jpg', 'images/bathroom.jpg', 'images/bathroom.jpg', 'images/boots.jpg', 'images/breakfast.jpg', 'images/bubblegum.jpg', 'images/chair.jpg', 'images/cthulhu.jpg', 'images/dog-duck', 'images/dragon.jpg', 'images/pen.jpg', 'images/pets-sweep.jpg', 'images/scissors.jpg', 'images/shark.jpg', 'images/sweep.png', 'images/tauntaun.jpg', 'images/unicorn.jpg', 'images/usb.gif', 'images/water-can.jpg', 'images/wine-glass.jpg'];
+
+var imageContainer = document.getElementById('image-container');
+var leftImageElement = document.getElementById('left-item');
+var middleImageElement = document.getElementById('middle-item');
+var rightImageElement = document.getElementById('right-item');
+var roundsOfVoting = 5;
+
+
+function SalesImage(name) {
+
+  this.name = name.substring(0, name.length - 4);
+
+
   this.timesClicked = 0;
   this.timesShown = 0;
-  this.image = image;
+  this.image = `images/${name}`;
 
   SalesImage.allImages.push(this);
+  SalesImage.imageMap[this.name] = this;
 }
-
-
 SalesImage.allImages = [];
+SalesImage.imageMap = {};
+
+for (var i = 0; i < products.length; i++) {
+  new SalesImage(products[i]);
+}
+console.log(SalesImage.allImages);
+
+
+/* SalesImage.allImages = [];
 
 
 new SalesImage('images/bag.jpg');
@@ -30,12 +52,12 @@ new SalesImage('images/tauntaun.jpg');
 new SalesImage('images/unicorn.jpg');
 new SalesImage('images/usb.gif');
 new SalesImage('images/water-can.jpg');
-new SalesImage('images/wine-glass.jpg');
+new SalesImage('images/wine-glass.jpg'); */
 
-var imageContainer = document.getElementById('image-container');
-var leftItem = document.getElementById('left-item');
+// var imageContainer = document.getElementById('image-container');
+/* var leftItem = document.getElementById('left-item');
 var middleItem = document.getElementById('middle-item');
-var rightItem = document.getElementById('right-item');
+var rightItem = document.getElementById('right-item'); */
 
 
 function generateRandomItems() {
@@ -67,28 +89,48 @@ function generateRandomItems() {
   return [leftChoice, middleChoice, rightChoice];
 }
 
+function renderImages() {
+  var currentlyRenderedImages = [leftImageElement.name, rightImageElement.name, middleImageElement.name];
+  var newImages = generateRandomItems();
 
+  while (
+    currentlyRenderedImages[0] === newImages[0].name ||
+  currentlyRenderedImages[1] === newImages[0].name ||
+  currentlyRenderedImages[2] === newImages[0].name ||
+  currentlyRenderedImages[0] === newImages[1].name ||
+  currentlyRenderedImages[1] === newImages[1].name ||
+  currentlyRenderedImages[2] === newImages[1].name ||
+  currentlyRenderedImages[0] === newImages[2].name ||
+  currentlyRenderedImages[1] === newImages[2].name ||
+  currentlyRenderedImages[2] === newImages[2].name
+  ) {
+    newImages = generateRandomItems();
+  }
 
+  leftImageElement.src = newImages[0].image;
+  leftImageElement.name = newImages[0].name;
+  newImages[0].timesShown++;
 
+  middleImageElement.src = newImages[1].image;
+  middleImageElement.name = newImages[1].name;
+  newImages[1].timesShown++;
 
-
-
-
-
-
-function renderImages(leftChoice, middleChoice, rightChoice) {
-  leftItem.src = leftChoice.image;
-  leftItem.timesShown++;
-
-  middleItem.src = middleChoice.image;
-  middleItem.timesShown++;
-
-  rightItem.src = rightChoice.image;
-  rightItem.timesShown++;
+  rightImageElement.src = newImages[2].image;
+  rightImageElement.name = newImages[2].name;
+  newImages[2].timesShown++;
 }
+renderImages();
 
 
-var randomImages = generateRandomItems();
-renderImages(randomImages[0], randomImages[1], randomImages[2]);
+/* function handleImageClick(event) {
+  roundsOfVoting--;
 
+  for (var i = 0; i < SalesImage.allImages.length; i++) {
+    if (event.target.name === SalesImage[i].timesClicked++) {
 
+      SalesImage.allImages[i].timesClicked++; */
+/* 
+    }
+  }
+}
+ */
